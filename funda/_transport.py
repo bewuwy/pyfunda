@@ -9,7 +9,11 @@ from urllib.parse import urlsplit
 
 from curl_cffi import requests
 import tls_client
-from tls_client.exceptions import TLSClientExeption  # upstream typo, do not "fix"
+try:
+    from tls_client.exceptions import TLSClientExeption  # older upstream typo
+except ImportError:
+    from tls_client.exceptions import TLSClientException as TLSClientExeption
+
 
 from funda.constants import DEFAULT_MAX_RETRIES, FINGERPRINT_POOL, RETRY_STATUS_CODES
 from funda.exceptions import FingerprintError, FundaRequestError
